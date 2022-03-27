@@ -9773,18 +9773,3 @@ let game1 = {
     "stores"
     ]
     };
-let games1 = await axios.get("https://api.rawg.io/api/games?key=b2a83978769f4df79815bf8e356b4711&page=1)
-let games2 = await axios.get("https://api.rawg.io/api/games?key=b2a83978769f4df79815bf8e356b4711&page=2)
-let games3 = await axios.get("https://api.rawg.io/api/games?key=b2a83978769f4df79815bf8e356b4711&page=3)
-let games4 = await axios.get("https://api.rawg.io/api/games?key=b2a83978769f4df79815bf8e356b4711&page=4)
-let games5 = await axios.get("https://api.rawg.io/api/games?key=b2a83978769f4df79815bf8e356b4711&page=5)
-// await axios.get( games3.data.next)
-//  games3.data.results
-let allGames= [games1.data.results,
-    games2.data.results,
-    games3.data.results,
-    games4.data.results,
-    games5.data.results]
-    console.log(allGames)
-    await Promise.all(allGames)
-export default game1

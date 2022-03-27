@@ -2,12 +2,16 @@ const { Router } = require('express');
 const {API_KEY} = process.env;
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
+const genres = require('./genres.js');
+const games = require('./games.js');
 
 
 const router = Router();
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
+router.use('/genres', genres);
+router.use('/games', games);
 
 
 module.exports = router;
