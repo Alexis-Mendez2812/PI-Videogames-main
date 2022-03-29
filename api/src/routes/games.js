@@ -1,7 +1,7 @@
 const { Router } = require('express');
-const { Sequelize } = require('sequelize');
+const { Sequelize, Model } = require('sequelize');
 const axios = require('axios');
-const { Genres, Videosgames } = require(`../db`)
+const { Genres, Videogames } = require(`../db`)
 const {API_KEY} = process.env;
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
@@ -13,36 +13,70 @@ const router = Router();
 
 router.get('/', async (req, res) => {
    let games = await allGames()
+   let gamesdb = await gamesDb()
+   let datos =[...gamesdb,...games]
+   let {name} = req.query;
+   if(name){
+    name=name.toLowerCase()
+         let filtro =datos.filter((e)=>e.name.toLowerCase().includes(name) )
+         // console.log(filtro)
+         return res.send(filtro)
+ }
+   res.send(datos)
+})
+
+router.get('/db', async (req, res) => {
+   let games = await gamesDb()
    res.send(games)
 })
 router.get('/:id', async (req, res) => {
     let {id} = req.params
-    id = Number(id)
-    let todos = await Genres.findAll(
-        {where: {
-            id:id
-        }})
-    console.log(todos)
-    if(todos.length==0){
-        let generos = await axios.get(`https://api.rawg.io/api/genres?key=${API_KEY}`)
-        generos= generos.data
-        generos= generos.results.map((e)=>({id:e.id,name:e.name,image_background:e.image_background}))
-        generos= generos.sort()
-        generos.forEach( async (e)=> await Genres.findOrCreate(
-            {where: {
-                id:e.id,
-                name: e.name,
-                image_background: e.image_background,
-            }}))
-        
-        
-            console.log(generos)
-            return res.send(generos)
-        }
-        todos= todos.map((e)=>({id:e.id,name:e.name,image_background:e.image_background}))
-        todos.sort()
-    res.send(todos)
+    let games = await allGames()
+    let gamesdb = await gamesDb()
+    let datos =[...gamesdb,...games]
+    let filtro =datos.filter((e)=>e.id == id )
+    // console.log(filtro)
+    return res.send(filtro)
 })
+
+router.post(`/post`, async (req, res) => {
+const {name,description,platforms,released,rating,background_image,genres} = req.body;
+try {
+    const [game,created] = await Videogames.findOrCreate({
+    where: {name,description,platforms,released,rating,background_image}});
+                // console.log("se creó mi game? "+ created )
+                // console.log(genres)
+                let gens = await Genres.findAll({
+                    where:{name:genres}
+                })
+                console.log(gens)
+                let gens2 = gens.map((e)=>(e.id))
+           await game.addGenres(gens2)
+
+           
+           return res.status(201).json({"mensaje":"game creado","game":game});
+          } catch (error) {
+            res.status(500).json({"mensaje":`Algo salio mal con tu game`,error});
+          }
+
+          
+})
+router.post(`/post2`, async (req, res) => {
+const {genres} = req.body;
+try {
+let gens = await Genres.findAll({
+    where:{name:genres}
+})
+console.log(gens)
+let gens2 = gens.map((e)=>(e.id))
+           return res.json({gens,gens2});
+          } catch (error) {
+            res.status(500).json({gens});
+          }
+
+          
+})
+
 
 async function allGames(){
     let games1 = axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=1`)
@@ -60,8 +94,15 @@ async function allGames(){
         games= games.map((e)=>({id:e.id,name:e.name,background_image:e.background_image,
             genres:e.genres,rating:e.rating,platforms:e.parent_platforms,released:e.released
             }))
-    console.log(games)
+    // console.log(games)
     return games
+}
+async function gamesDb(){
+    let games = await Videogames.findAll({
+        include: Genres
+    })
+    console.log(games)
+ return games
 }
 
 

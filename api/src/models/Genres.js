@@ -16,5 +16,7 @@ module.exports = (sequelize) => {
     image_background: {
       type: DataTypes.STRING,
     },
+  },{
+    timestamps: false
   });
 };
