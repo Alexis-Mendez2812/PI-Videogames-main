@@ -1,7 +1,8 @@
 const { Router } = require('express');
 const { Sequelize, Model } = require('sequelize');
 const axios = require('axios');
-const { Genres, Videogames } = require(`../db`)
+const { Genres, Videogames } = require(`../db`);
+const e = require('express');
 const {API_KEY} = process.env;
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
@@ -12,8 +13,15 @@ const {API_KEY} = process.env;
 const router = Router();
 
 router.get('/', async (req, res) => {
-   let games = await allGames()
+    function mapeo(arr){
+        arr= arr.map(e=>e.name)
+        console.log(arr)
+     return arr }
+
+    let games = await allGames()
    let gamesdb = await gamesDb()
+//    gamesdb=gamesdb.map((e)=>(e.Genres=mapeo(e.Genres)))
+//      games=games.map((e)=>(e.genres=mapeo(e.genres)))
    let datos =[...gamesdb,...games]
    let {name} = req.query;
    if(name){
@@ -49,7 +57,7 @@ try {
                 let gens = await Genres.findAll({
                     where:{name:genres}
                 })
-                console.log(gens)
+                // console.log(gens)
                 let gens2 = gens.map((e)=>(e.id))
            await game.addGenres(gens2)
 
@@ -67,7 +75,7 @@ try {
 let gens = await Genres.findAll({
     where:{name:genres}
 })
-console.log(gens)
+// console.log(gens)
 let gens2 = gens.map((e)=>(e.id))
            return res.json({gens,gens2});
           } catch (error) {
@@ -91,8 +99,14 @@ async function allGames(){
         ))
         games.flat()
         games = [...games[0],...games[1],...games[2],...games[3],...games[4]]
-        games= games.map((e)=>({id:e.id,name:e.name,background_image:e.background_image,
-            genres:e.genres,rating:e.rating,platforms:e.parent_platforms,released:e.released
+        games= games.map((e)=>({
+            id:e.id,
+            name:e.name,
+            background_image:e.background_image,
+            Genres:e.genres,
+            rating:e.rating,
+            platforms:e.parent_platforms,
+            released:e.released
             }))
     // console.log(games)
     return games
@@ -101,7 +115,7 @@ async function gamesDb(){
     let games = await Videogames.findAll({
         include: Genres
     })
-    console.log(games)
+    // console.log(games)
  return games
 }
 
