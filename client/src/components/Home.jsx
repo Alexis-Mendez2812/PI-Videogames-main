@@ -26,13 +26,13 @@ export default function Home(){
 function handleOnGenres(event){  
     dispatch(filterByGenre(event.target.value))   
     setAux(event.target.value)} 
-    console.log("estado auxiliar",aux)
+    // console.log("estado auxiliar",aux)
 
 //Funcion del los select by orders 
 function handleOnOrder(event){  
     dispatch(filterByOrder(event.target.value))   
     setAux(event.target.value)} 
-    console.log("estado auxiliar",aux)
+    // console.log("estado auxiliar",aux)
 
 
 
@@ -60,7 +60,7 @@ function handleOnOrder(event){
 
 {/*Orden alfabetico */}
 <select id='alf' defaultValue='All' onChange={(e) => handleOnOrder(e)}> 
-    <option value='All'>Alphabetical</option>
+    <option value='asc'>Alphabetical</option>
     <option value='asc'>asc</ option>
     <option value='des'>des</   option>     
 </select>
@@ -76,6 +76,7 @@ function handleOnOrder(event){
 <div>
     {state &&  <GamesCard  games={state} />}
 </div>
+<p>{aux}</p>
     
         </>
 )};

@@ -24,6 +24,20 @@ export function getNameGame(name){
         }
     }
 }
+export function createGame(game){
+    return async function(dispatch){
+     try{
+
+         var json = await axios.post(`http://localhost:3001/games/post`,{game});
+         return dispatch({
+             type: "CREATE_GAME",
+             payload:json.data
+            })
+        }catch(error){
+            console.log(error)
+        }
+    }
+}
 
 export function getGenres(){
     return async function(dispatch){
@@ -40,14 +54,14 @@ export function getGenres(){
     }
 }
 
-export function filterByGenre(temp){
+export function filterByGenre(genre){
          return {
             type: "FILTER_BY_GENRE",
-            payload:temp
+            payload:genre
         }}
 
-export function filterByOrder(temp){
+export function filterByOrder(order){
          return {
             type: "FILTER_BY_ORDER",
-            payload:temp
+            payload:order
         }}

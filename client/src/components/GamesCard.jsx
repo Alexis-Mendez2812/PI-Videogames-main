@@ -2,7 +2,7 @@ import React from 'react'
 import CardHome from './CardHome'
 
 export default function GamesCard({games}) {
-console.log(games[0])
+// console.log(games[0])
   return (
     <div>
         {games.map((e)=>(

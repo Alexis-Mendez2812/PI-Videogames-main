@@ -3,7 +3,7 @@
 
 export default function CardHome(props){
     const {id,name,background_image,Genres,rating} = props
-    console.log(Genres)
+    // console.log(Genres)
     return(
     <div key={id}>
     <img src={background_image} alt={background_image} style={{height:"100px"}} /><br/>

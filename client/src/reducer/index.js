@@ -21,7 +21,7 @@ switch(action.type){
             games:action.payload
 
         }
-    case "GET_Genres":
+    case "GET_GENRES":
         return {
             ...state,
             Genres:action.payload
@@ -37,7 +37,7 @@ switch(action.type){
 
             filter = action.payload === "All" ? state.allGames : 
             state.allGames.filter ((e)=>
-            isInclude(e,action.payload)
+            isInclude(e.Genres,action.payload)
             )
             console.log("filter")
             console.log(filter)
@@ -78,19 +78,19 @@ switch (action.payload) {
   return 0;
 });break;
     case "high":order= state.allGames.sort(function (a, b) {
-  if (Number(a.rating.slice(0,2)) < Number(b.rating.slice(0,2))) {
+  if (Number(a.rating) < Number(b.rating)) {
     return 1;
   }
-  if (Number(a.rating.slice(0,2)) > Number(b.rating.slice(0,2))) {
+  if (Number(a.rating) > Number(b.rating)) {
     return -1;
   }
   return 0;
 });break;
     case "low":order= state.allGames.sort(function (a, b) {
-  if (Number(a.rating.slice(0,2)) > Number(b.rating.slice(0,2))) {
+  if (Number(a.rating) > Number(b.rating)) {
     return 1;
   }
-  if (Number(a.rating.slice(0,2)) < Number(b.rating.slice(0,2))) {
+  if (Number(a.rating) < Number(b.rating)) {
     return -1;
   }
   return 0;
@@ -122,9 +122,10 @@ switch (action.payload) {
 
 }
 
-function isInclude(obj,pay){
-    let str = obj.Genres
-    if(str===undefined)return false
-    if(str.includes(pay))return true
-    return false
+function isInclude(arr,genre){
+  let esta= false
+  for(let i=0;i<arr.length;i++){
+    if(arr[i].name.includes(genre)){esta=true}
+  }
+  return esta 
 }
