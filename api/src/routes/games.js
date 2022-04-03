@@ -113,7 +113,7 @@ async function allGames() {
     background_image: e.background_image,
     Genres: e.genres,
     rating: e.rating,
-    platforms: e.parent_platforms,
+    platforms: e.platforms.map((e)=>e.platform.name),
     released: e.released,
   }));
   // console.log(games)
@@ -125,6 +125,15 @@ async function gamesDb() {
   });
   // console.log(games)
   return games;
+}
+ async function getPlatforms(){
+  let games = await allGames()
+  let platforms= games.map((e) =>e.platforms)
+  platforms= platforms.flat()
+  const dataArr = new Set(platforms);
+
+    let result = [...dataArr];
+  return result
 }
 
 module.exports = router;
