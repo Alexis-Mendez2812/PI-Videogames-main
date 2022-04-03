@@ -30,7 +30,8 @@ export default function AddGame() {
     platforms = [...dataArr];
   }
 
-  // console.log("select",select)
+  console.log("select",select)
+  console.log("game.platforms",game.platforms)
 
   const handleOnSubmit = function (event) {
     event.preventDefault();
@@ -49,8 +50,12 @@ export default function AddGame() {
   const handleOnPlatforms = function (event) {
     if (!select.find((e) => e === event.target.value)) {
       setSelect([...select, event.target.value]);
+      setGame({ ...game, platforms:[...select, event.target.value]});
+      setController(validate(game));
     } else {
       setSelect(select.filter((e) => e !== event.target.value));
+      setGame({ ...game, platforms: select.filter((e) => e !== event.target.value) });
+      setController(validate(game));
     }
   };
 
@@ -144,7 +149,7 @@ export default function AddGame() {
           <select onChange={handleOnPlatforms}>
             {platforms &&
               platforms.map((e) => (
-                <option key={e} value={e}>
+                <option key={e} value={e} onChange={handleOnPlatforms}>
                   {e}
                 </option>
               ))}
@@ -218,7 +223,7 @@ export function validate(game) {
   } 
  
   //platforms
-  if (!game.platforms) {
+  if (!game.platforms||game.platforms.legth==0) {
     controller.platforms = "The platforms are required";
   }
   //genres
@@ -238,6 +243,7 @@ export function validate(game) {
   controller.description) {
     controller.button = "button";
   }
-  console.log(controller);
+  // console.log("controller",controller);
+  // console.log("game",game)
   return controller;
 }
