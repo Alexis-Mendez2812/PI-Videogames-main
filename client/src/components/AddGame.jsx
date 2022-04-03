@@ -46,16 +46,21 @@ export default function AddGame() {
     setController(
       validate({ ...game, [event.target.name]: event.target.value })
     );
+    
   };
   const handleOnPlatforms = function (event) {
     if (!select.find((e) => e === event.target.value)) {
       setSelect([...select, event.target.value]);
       setGame({ ...game, platforms:[...select, event.target.value]});
-      setController(validate(game));
+      setController(validate({ ...game, platforms:[...select, event.target.value]}));
     } else {
       setSelect(select.filter((e) => e !== event.target.value));
       setGame({ ...game, platforms: select.filter((e) => e !== event.target.value) });
-      setController(validate(game));
+      setController(validate({ ...game, platforms: select.filter((e) => e !== event.target.value) }));
+      if(select.length===1){
+        setGame({ ...game, platforms: "" });
+        setController(validate({ ...game, platforms: "" }))
+      }
     }
   };
 
@@ -223,7 +228,7 @@ export function validate(game) {
   } 
  
   //platforms
-  if (!game.platforms||game.platforms.legth==0) {
+  if (!game.platforms||game.platforms.legth<1) {
     controller.platforms = "The platforms are required";
   }
   //genres
@@ -244,6 +249,6 @@ export function validate(game) {
     controller.button = "button";
   }
   // console.log("controller",controller);
-  // console.log("game",game)
+  console.log("game",game)
   return controller;
 }
