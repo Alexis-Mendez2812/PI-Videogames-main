@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import { createGame, getGenres, getGames } from "../actions";
 
 export default function AddGame() {
   const state = useSelector((state) => state.Genres);
   const allGames = useSelector((state) => state.allGames);
+  const gamed = useSelector((state) => state.gamed);
+  const history = useHistory()
   const [game, setGame] = useState({
     name: "",
     background_image: "",
@@ -17,11 +20,12 @@ export default function AddGame() {
   });
   const [controller, setController] = useState({});
   let [platforms, setPlatforms] = useState([]);
+  let response = "";
   const [select, setSelect] = useState([]);
   const [genres, setGenres] = useState([]);
   const dispatch = useDispatch();
 
-  if (allGames) {
+  if (Array.isArray(allGames)) {
     platforms = allGames.map((e) => e.platforms);
     platforms = platforms.flat().sort();
 
@@ -30,13 +34,21 @@ export default function AddGame() {
     platforms = [...dataArr];
   }
 
-  console.log("select",select)
-  console.log("game.platforms",game.platforms)
+  // console.log("controller",controller)
+  // console.log("game.genres",game.genres)
+  console.log("gamed",gamed)
+if(gamed){  setTimeout(() => {
+    console.log("set",gamed)
+    
+          history.push(`/home/${gamed.id}`)
+        }, 2000)};        
 
-  const handleOnSubmit = function (event) {
+  const handleOnSubmit =async function (event) {
     event.preventDefault();
-    if (controller.button === "submit") {
-      dispatch(createGame(game));
+    if (!controller.button && game.name && game.description && game.platforms && game.genres) {
+    await  dispatch(createGame({...game,createdDb:true}));
+    alert(`LOADING ${game.name||gamed.name}...`)
+     response= game.name
     } else {
       alert("Complete todos los requisitos");
     }
@@ -64,14 +76,22 @@ export default function AddGame() {
     }
   };
 
-  const handleSelectChange = (event) => {
+  const handleOnGenres = (event) => {
     if (!genres.find((e) => e === event.target.value)) {
       setGenres([...genres, event.target.value]);
+      setGame({ ...game, genres:[...genres, event.target.value]});
+      setController(validate({ ...game, genres:[...genres, event.target.value]}));
     } else {
       setGenres(genres.filter((e) => e !== event.target.value));
+      setGame({ ...game, genres: genres.filter((e) => e !== event.target.value) });
+      setController(validate({ ...game, genres: genres.filter((e) => e !== event.target.value) }));
+      if(genres.length===1){
+        setGame({ ...game, genres: "" });
+        setController(validate({ ...game, genres: "" }))
+      }
     }
   };
-  // console.log("genres",genres)
+  // console.log("rating",typeof game.rating)
 
   useEffect(() => {
     dispatch(getGenres());
@@ -151,7 +171,7 @@ export default function AddGame() {
           {controller.rating && <p>●{controller.rating}</p>}
           <label>Platforms *</label>
           <br />
-          <select onChange={handleOnPlatforms}>
+          <select onChange={handleOnPlatforms} >
             {platforms &&
               platforms.map((e) => (
                 <option key={e} value={e} onChange={handleOnPlatforms}>
@@ -184,7 +204,8 @@ export default function AddGame() {
                     key={e.name}
                     name={e.name}
                     value={e.name}
-                    onChange={handleSelectChange}
+                    onChange={handleOnGenres}
+                    onClick={handleOnGenres}
                   />
                   {e.name}
                 </label>
@@ -194,6 +215,7 @@ export default function AddGame() {
           <div>
           {controller.button ==="button" &&<input  type="button" value="CREATE?" ></input>}
           {!controller.button &&<button type="submit" >CREATE</button>}
+        {response && <h4>LOADING {response} ...</h4>}
           </div>
         </form>
       </div>
@@ -245,10 +267,10 @@ export function validate(game) {
   controller.rating||
   controller.platforms||
   controller.released||
-  controller.description) {
+  controller.description|| !game.name || !game.description || !game.platforms || !game.genres) {
     controller.button = "button";
   }
   // console.log("controller",controller);
-  console.log("game",game)
+  // console.log("game",game)
   return controller;
 }

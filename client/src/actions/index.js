@@ -2,7 +2,7 @@ import axios from "axios";
 
 export function getGames(){
     return async function(dispatch){
-        var json = await axios.get("http://localhost:3001/games");
+        let json = await axios.get("http://localhost:3001/games");
         return dispatch({
             type: "GET_GAMES",
             payload:json.data
@@ -14,9 +14,23 @@ export function getNameGame(name){
     return async function(dispatch){
      try{
 
-         var json = await axios.get(`http://localhost:3001/games?name=${name}`);
+         let json = await axios.get(`http://localhost:3001/games?name=${name}`);
          return dispatch({
              type: "GET_NAME_GAMES",
+             payload:json.data
+            })
+        }catch(error){
+            console.log(error)
+        }
+    }
+}
+export function getIdGame(id){
+    return async function(dispatch){
+     try{
+
+         let json = await axios.get(`http://localhost:3001/games/${id}`);
+         return dispatch({
+             type: "GET_ID_NAME",
              payload:json.data
             })
         }catch(error){
@@ -28,7 +42,7 @@ export function createGame(game){
     return async function(dispatch){
      try{
 
-         var json = await axios.post(`http://localhost:3001/games/post`,{game});
+         let json = await axios.post(`http://localhost:3001/games/post`,game);
          return dispatch({
              type: "CREATE_GAME",
              payload:json.data
@@ -43,7 +57,7 @@ export function getGenres(){
     return async function(dispatch){
     try{
 
-        var json = await axios.get("http://localhost:3001/genres",{});
+        let json = await axios.get("http://localhost:3001/genres",{});
         return dispatch({
             type: "GET_GENRES",
             payload:json.data

@@ -2,7 +2,6 @@ const { Router } = require("express");
 const { Sequelize, Model } = require("sequelize");
 const axios = require("axios");
 const { Genres, Videogames } = require(`../db`);
-const e = require("express");
 const { API_KEY } = process.env;
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
@@ -14,7 +13,7 @@ const router = Router();
 router.get("/", async (req, res) => {
   function mapeo(arr) {
     arr = arr.map((e) => e.name);
-    console.log(arr);
+    //console.log(arr);
     return arr;
   }
 
@@ -39,13 +38,20 @@ router.get("/db", async (req, res) => {
 });
 router.get("/:id", async (req, res) => {
   let { id } = req.params;
-  let games = await allGames();
-  let gamesdb = await gamesDb();
-  let datos = [...gamesdb, ...games];
-  let filtro = datos.filter((e) => e.id == id);
+  console.log(id,typeof id)
+  let game=""
+  if( id.length<6){
+     game = await gameById(id);
+
+  }else if( id.length>6){
+   game = await gamesDb();
+    game.filter((e) => e.id == id);
+  }
+  
   // console.log(filtro)
-  return res.send(filtro);
+  return res.send(game);
 });
+
 
 router.post(`/post`, async (req, res) => {
   const {
@@ -77,7 +83,7 @@ router.post(`/post`, async (req, res) => {
     let gens2 = gens.map((e) => e.id);
     await game.addGenres(gens2);
 
-    return res.status(201).json({ mensaje: "game creado", game: game });
+    return res.status(201).json(game);
   } catch (error) {
     res.status(500).json({ mensaje: `Algo salio mal con tu game`, error });
   }
@@ -117,6 +123,29 @@ async function allGames() {
     released: e.released,
   }));
   // console.log(games)
+  return games;
+}
+async function gamesDb() {
+  let games = await Videogames.findAll({
+    include: Genres,
+  });
+  // console.log(games)
+  return games;
+}
+async function gameById(id) {
+  let games =await axios.get(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`);
+  // console.log(games)
+  games=games.data
+  games = {
+    id: games.id,
+    name: games.name,
+    background_image: games.background_image,
+    Genres: games.genres,
+    rating: games.rating,
+    platforms: games.platforms.map((e)=>e.platform.name),
+    released: games.released,
+    description: games.description_raw,
+  }
   return games;
 }
 async function gamesDb() {

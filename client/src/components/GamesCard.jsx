@@ -8,6 +8,7 @@ export default function GamesCard({games}) {
         {games.map((e)=>(
             <CardHome 
             key={e.id} 
+            id={e.id} 
             name={e.name}
             background_image={e.background_image}
             Genres={e.Genres}

@@ -1,5 +1,6 @@
 const initialState={
     games:[],
+    gamed:{},
     allGames:[],
     Genres:[],
 }
@@ -14,11 +15,23 @@ switch(action.type){
             games:action.payload,
             allGames:action.payload
         }
+    case "CREATE_GAME":
+        return {
+            ...state,
+            gamed:action.payload
+        }
     case "GET_NAME_GAMES":
         console.log(action.payload)
         return {
             ...state,
             games:action.payload
+
+        }
+    case "GET_ID_NAME":
+        console.log(action.payload)
+        return {
+            ...state,
+            game:action.payload
 
         }
     case "GET_GENRES":
