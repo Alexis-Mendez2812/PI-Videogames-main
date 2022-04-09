@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import CardHome from './CardHome'
 
 export default function GamesCard({games}) {
@@ -6,13 +7,17 @@ export default function GamesCard({games}) {
   return (
     <div>
         {games.map((e)=>(
-            <CardHome 
-            key={e.id} 
+          <div key={e.id} >
+          <Link to={`home/${e.id}`}/>
+          <CardHome 
+            
             id={e.id} 
             name={e.name}
             background_image={e.background_image}
             Genres={e.Genres}
-            rating={e.rating} />)
+            rating={e.rating} />
+            </div>
+            )
         )}
     </div>
   )

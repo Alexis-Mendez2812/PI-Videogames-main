@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-
+import "../styles/Landing.scss"
 export default function Landing(){
     return(<>
-    <div style={{background: "white",display:"flex"  }}>
+    <div className="conteiner" >
     <img src="https://wallpaper.dog/large/20492255.jpg"alt="games" style={{height:"800px",position:"absolute",zIndex:"-1"}} />
     <div style={{background: "white",display:"block"  }}>
 

@@ -1,17 +1,29 @@
-import React,{ useEffect } from "react"
+import React,{ useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import GamesCard from "./GamesCard"
 import SearchBar from "./SearchBar"
 import { getGames,getGenres,filterByGenre,filterByOrder } from "../actions"
 import { Link } from 'react-router-dom';
+import Paginado from "./Paginado"
 
 export default function Home(){
 
-   const [aux , setAux] = React.useState('') 
+   const [aux , setAux] = useState('') 
 
     //Mi data de los estados
    const state =useSelector(state=>state.games)
+   const allGames =useSelector(state=>state.allGames)
    const Genres =useSelector(state=>state.Genres)
+   const [currentPage,setCurrentPage]=useState(1)
+   const [charactersPerPage,setCharactersPerPage]=useState(15)
+   const indexOfLastCharacter = currentPage* charactersPerPage
+   const indexOfFirstCharacter= indexOfLastCharacter- charactersPerPage
+
+   let currentCharacters=[]
+if(allGames&&allGames.length>1){ currentCharacters = state.slice(indexOfFirstCharacter,indexOfLastCharacter)
+}
+console.log(currentCharacters,state)
+   const paginado = (pageNumber)=>{setCurrentPage(pageNumber)}
 
    const dispatch = useDispatch()  
    useEffect(()=>{
@@ -33,7 +45,6 @@ function handleOnOrder(event){
     dispatch(filterByOrder(event.target.value))   
     setAux(event.target.value)} 
     // console.log("estado auxiliar",aux)
-
 
 
                         return(
@@ -73,8 +84,14 @@ function handleOnOrder(event){
 </select>
     
 <button id='AddGame'><Link to={"/AddGame"}>Create a Game</Link></button> 
+
+{state &&<Paginado
+charactersPerPage={charactersPerPage}
+allCharacters={state.length}
+paginado={paginado}
+/>}
 <div>
-    {state &&  <GamesCard  games={state} />}
+    {allGames&& <GamesCard  games={currentCharacters} />}
 </div>
 <p>{aux}</p>
     
