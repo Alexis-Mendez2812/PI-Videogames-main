@@ -83,7 +83,7 @@ function handleOnOrder(event){
     <option value='low'>low</   option>     
 </select>
     
-<button id='AddGame'><Link to={"/AddGame"}>Create a Game</Link></button> 
+<button className="to-home" id='AddGame'><Link to={"/AddGame"}>Create a Game</Link></button> 
 
 {state &&<Paginado
 charactersPerPage={charactersPerPage}

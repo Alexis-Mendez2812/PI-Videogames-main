@@ -2,15 +2,19 @@ import { Link } from "react-router-dom";
 import "../styles/Landing.scss"
 export default function Landing(){
     return(<>
-    <div className="conteiner" >
-    <img src="https://wallpaper.dog/large/20492255.jpg"alt="games" style={{height:"800px",position:"absolute",zIndex:"-1"}} />
-    <div style={{background: "white",display:"block"  }}>
+    <div className="landing-all">
+    <img className="landing-bkg" src="https://wallpaper.dog/large/20492255.jpg"alt="games" />
 
-    <h1>Bienvenidos!!👻👾🤖🎮🕹</h1>
-    <section>
+    <div className="landing-conteiner" >
+        <p></p>
+    </div>
+    <div className="landing-landing">
+
+    <h1 className="landing-h1">Bienvenidos!!</h1>
+    <button className="landing-to-home">
         <Link to="/home">PRESS START</Link>
-    </section>
-    <h4>Creado por: Alexis Mendez</h4>
+    </button>
+    <p>Alexis Mendez</p>
     <div>
 
     </div>
