@@ -97,6 +97,14 @@ paginado={paginado}
 <div>
     {allGames&& <GamesCard  games={currentCharacters} />}
 </div>
+<div className="Home-conteiner">
+
+{state &&<Paginado
+charactersPerPage={charactersPerPage}
+allCharacters={state.length}
+paginado={paginado}
+/>}
+</div>
 <p>{aux}</p>
     
 </div>
