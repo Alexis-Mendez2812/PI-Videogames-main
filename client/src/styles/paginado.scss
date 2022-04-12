@@ -1,0 +1,38 @@
+.paginado-container {  
+    position: relative;  
+    height: 10vh;  
+    width: 50%;  
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),  
+     url("https://images.pexels.com/photos/247431/pexels-photo-247431.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");  
+    background-size: cover;  
+    background-position: center;  
+    display: flex;  
+    align-items: center;  
+    justify-content: center;  
+   }  
+   .paginado-container .paginado-pagination {  
+    position: relative;  
+    height: 60px;  
+    background: rgba(255, 255, 255, 0.05);  
+    box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.3);  
+    display: flex;  
+    align-items: center;  
+    justify-content: center;  
+    backdrop-filter: blur(3px);  
+    border-radius: 2px;  
+   }  
+   .paginado-container .paginado-pagination li {  
+    list-style-type: none;  
+    display: inline-block;  
+   }  
+   .paginado-container .paginado-pagination li a {  
+    position: relative;  
+    padding: 20px 25px;  
+    text-decoration: none;  
+    color: #fff;  
+    font-weight: 500;  
+   }  
+   .paginado-container .paginado-pagination li a:hover,  
+   .paginado-container .paginado-pagination li.active a {  
+    background: rgba(255, 255, 255, 0.2);  
+   } 

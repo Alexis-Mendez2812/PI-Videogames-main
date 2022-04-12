@@ -1,0 +1,94 @@
+//CardHome-cardHome
+.CardHome-container {
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-evenly;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
+.CardHome-card-conteiner {
+    width: 350px;
+    height: 350px;
+    position: relative;
+  }
+  
+  .CardHome-card {
+    position: relative;
+    top: 50%;
+    left: 25%;
+    width: 300px;
+    height: 200px;
+    transform: translate(-30%, -30%);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+    transition: 0.5s;
+  }
+  .CardHome-card-image2{
+      width: 300px;
+      height: 150px;
+      overflow: hidden;
+      align-self: center;
+      margin: auto
+  }
+  .CardHome-card .CardHome-card-image {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background-color: #000;
+    transition: 0.5s;
+  }
+  .CardHome-card:hover img {
+    opacity: 0.5;
+    transition: 0.5s;
+  }
+  
+  .CardHome-card:hover .CardHome-card-image {
+    transform: translateY(+200px);
+    transition: all 0.9s;
+  }
+  
+ 
+  
+  /**** Personal Details ****/
+  .CardHome-details {
+    margin: 10PX 0 0 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(100, 90, 90, 0.7);
+    width: 100%;
+    height: 220px;
+    z-index: 1;
+    padding: 5px;
+  }
+  .CardHome-details h3 {
+    margin: -5px 0 0 0;
+    font-size: 25px;
+    padding: 0;
+    text-align: center;
+    color: #fff;
+  }
+  .CardHome-span{
+    
+    text-decoration: none;
+    padding:3px;
+    margin:1px;
+    background-color: #856;
+    color:#fff;
+    border: 1px solid #2b2b2f;
+    border-radius: 5px;
+}
+.CardHome-star{
+  font-size: 20px;
+  margin: -5px 0 5px 0;
+}
+.CardHome-div-span{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}

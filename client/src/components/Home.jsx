@@ -5,6 +5,8 @@ import SearchBar from "./SearchBar"
 import { getGames,getGenres,filterByGenre,filterByOrder } from "../actions"
 import { Link } from 'react-router-dom';
 import Paginado from "./Paginado"
+import "../styles/Home.scss"
+
 
 export default function Home(){
 
@@ -48,7 +50,9 @@ function handleOnOrder(event){
 
 
                         return(
-                        <>
+                        <div className="Home-conteiner">
+                            
+                        
 <div key="searchbar">
     <SearchBar   />    
 </div>
@@ -95,5 +99,5 @@ paginado={paginado}
 </div>
 <p>{aux}</p>
     
-        </>
+</div>
 )};

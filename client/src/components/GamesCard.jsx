@@ -5,10 +5,9 @@ import CardHome from './CardHome'
 export default function GamesCard({games}) {
 // console.log(games[0])
   return (
-    <div>
+    <div className="CardHome-container">
         {games.map((e)=>(
-          <div key={e.id} >
-          <Link to={`home/${e.id}`}/>
+          <div key={e.id}  href={`/home/${e.id}`} >
           <CardHome 
             
             id={e.id} 

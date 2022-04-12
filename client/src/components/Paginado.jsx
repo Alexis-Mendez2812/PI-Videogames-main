@@ -1,5 +1,5 @@
 import React from "react"
-
+import "../styles/paginado.scss"
 
 
 export default function Paginado({charactersPerPage,allCharacters,paginado}){
@@ -10,15 +10,15 @@ for (let i = 0; i <Math.ceil(allCharacters/charactersPerPage) ; i++) {
 }
 console.log(pageNumbers)
     return(
-        <nav>
+        <div className="paginado-container">
 
-    <div className="paginado">
+    <ul className="paginado-pagination">
         {pageNumbers&&
         pageNumbers.map(number=>(
-            <span className="number" key={number}>
+            <li className="number" key={number}>
         <a onClick={()=>paginado(number)}>{number}</a>
-        </span>
+        </li>
         ))}
-    </div>       
-        </nav>
+    </ul>       
+        </div>
 )}
