@@ -8,19 +8,23 @@ body{
     transform: rotatex(-15deg)
 }
 .landing-landing{
-    margin-top:100px;
+
+    margin-top: 100px;
     z-index: 10;
     padding: 2rem 1rem;
     background: linear-gradient(to bottom, rgb(255, 255, 255), rgba(0, 0, 0, 0.284));
     align-self: center;
     width: 50%;
-    height: 50vh;
+    height: 70vh;
     position: relative;
     align-items: center;
     display: flex;
     align-content: center;
-    flex-direction: column;
+    flex-direction: row;
     box-shadow: 10px;
+    transition: all 0.3s ease;
+    flex-wrap: wrap;
+    justify-content: center;
     section{
         text-decoration: none;
     }
@@ -28,13 +32,14 @@ body{
         margin-top: 3rem;
     }
     transition:all 0.3s ease;
+    font-family: auto
     
     
 
 }
 .landing-bkg{
     position: absolute;
-    z-index: -1;
+    z-index: -10;
 }
 
 .landing-all{
@@ -55,8 +60,11 @@ body{
     display: flex;
 }
 .landing-h1{
+    margin-top: auto;
     align-self: top;
     font-size: 54px;
+    text-align-last: center;
+    font-family: inherit;
     
 }
 p{
@@ -67,9 +75,10 @@ p{
         font-size: 32px;
         text-align: center;
         min-width: 130px;
-        height: 160px;
-        color: #fff;
-        padding: 20px 10px 50px 10px ;
+        height: 150px;
+        color: rgb(10, 10, 10);
+        
+        padding: 20px 20px 20px 20px ;
         font-weight: bold;
         cursor: pointer;
         transition: all 0.3s ease;
@@ -81,8 +90,12 @@ p{
         background: #fff;
         overflow: hidden;
         border: 2px solid #09090a;
-        color: #02891d;
+        background-color: #07090796;
+        
       }
+      a{    font-size: 50px;
+          font-family: fantasy;
+        text-decoration: auto;}
       .landing-to-home:hover {
         color: rgb(220, 62, 62);
       }
@@ -98,5 +111,27 @@ p{
         bottom: 0;
         height: 0;
         width: 100%;
-        background: #0075ea;
+        background: #04d70093;
       }
+      .h1{
+          font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      }
+      .By{
+          height: 80px;
+          width: 100%;
+          padding: 15px;
+          background-color: rgba(90, 88, 88, 0.579);
+          font-size: 28px;
+          margin: 10px -15px -20px -15px;
+      }
+      .character{
+          margin-top:90px;
+          position: absolute;
+          z-index:-1;
+        width: 50%;
+        height: 70vh;
+          background-color: red;
+          background-image:url("https://www.enter.co/wp-content/uploads/2017/10/jigsaw-1024x768.jpg");
+
+      }
+    //   https://www.enter.co/wp-content/uploads/2017/10/jigsaw-1024x768.jpg

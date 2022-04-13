@@ -1,0 +1,22 @@
+.SearchBar-body{}
+.SearchBar-form{
+}
+.SearchBar-input{
+width: 200px;
+height: 40px;
+background: crimson;
+border-radius: 50px 0px 0px 50px;
+text-shadow: 0 0 10px crimson;
+font-weight: bolder;
+border:3px solid rgb(161, 4, 218);
+}
+
+.SearchBar-button{
+    height: 48px;
+    background-color:#000;
+    color:#fff;
+    font-weight: bolder;
+    border-radius:0px 50px 50px 0px ;
+    border:3px solid rgb(161, 4, 218);
+}
+

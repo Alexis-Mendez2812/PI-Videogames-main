@@ -52,8 +52,8 @@ function handleOnOrder(event){
                         return(
                         <div className="Home-conteiner">
                             
-                        
-<div key="searchbar">
+      <div className="Home-nav">                  
+<div className="Home-search" key="searchbar">
     <SearchBar   />    
 </div>
 
@@ -87,8 +87,8 @@ function handleOnOrder(event){
     <option value='low'>low</   option>     
 </select>
     
-<button className="to-home" id='AddGame'><Link to={"/AddGame"}>Create a Game</Link></button> 
-
+<button className="Home-AddGame" id='AddGame'><Link to={"/AddGame"}>Create a Game</Link></button> 
+</div>
 {state &&<Paginado
 charactersPerPage={charactersPerPage}
 allCharacters={state.length}

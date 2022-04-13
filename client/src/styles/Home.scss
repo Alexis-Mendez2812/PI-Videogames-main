@@ -8,3 +8,49 @@
     flex-wrap: wrap;
     justify-content: space-around;
 }
+select { 
+    width: 10%;
+    border-radius: 0px 0px 10px 10px ;
+    background-color: rgba(133, 131, 131, 0.658);
+    color: #fff;
+    font-weight: bolder;
+}
+.Home-nav{
+
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: space-around
+    
+}
+
+.Home-search{
+    display: block;
+}
+.Home-AddGame{
+    width: 20%;
+    border-radius: 0px 0px 10px 10px ;
+    background-color: rgba(133, 131, 131, 0.658);
+    font-weight: bolder;
+    a{    
+        
+        color: crimson;
+        font-size: 30px;
+        font-family: ui-serif;
+    }
+    display: block;
+    transition: 0.5s;
+}
+.Home-AddGame:hover{
+    width: 30%;
+    background-color: crimson;
+    font-weight: bolder;
+    a{    
+        
+        color: rgba(133, 131, 131, 0.658);
+        
+        font-family: ui-serif;
+    }
+}
