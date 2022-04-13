@@ -45,7 +45,7 @@ router.get("/:id", async (req, res) => {
 
   }else if( id.length>6){
    game = await gamesDb();
-    game.filter((e) => e.id == id);
+   game = game.filter((e) => e.id === id);
   }
   
   // console.log(filtro)

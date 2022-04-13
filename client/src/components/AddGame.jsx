@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import "../styles/Form.scss";
-import { createGame, getGenres, getGames } from "../actions";
+import { createGame, getGenres, getGames, vaciar } from "../actions";
 // className="Form-"
 export default function AddGame() {
   const state = useSelector((state) => state.Genres);
@@ -37,13 +37,7 @@ export default function AddGame() {
   // console.log("controller",controller)
   // console.log("game.genres",game.genres)
   console.log("gamed", gamed);
-  if (gamed) {
-    setTimeout(() => {
-      console.log("set", gamed);
-
-      history.push(`/home/${gamed.id}`);
-    }, 2000);
-  }
+  
 
   const handleOnSubmit = async function (event) {
     event.preventDefault();
@@ -54,8 +48,17 @@ export default function AddGame() {
       game.platforms &&
       game.genres
     ) {
-      await dispatch(createGame({ ...game, createdDb: true }));
+       dispatch(createGame({ ...game, createdDb: true }));
       alert(`LOADING ${game.name || gamed.name}...`);
+      if (gamed) {
+        setTimeout(() => {
+          console.log("set", gamed.id);
+    
+          history.push(`/home`);
+
+
+        }, 3000);
+      }
       response = game.name;
     } else {
       alert("Complete todos los requisitos");
@@ -122,6 +125,7 @@ export default function AddGame() {
 
   useEffect(() => {
     dispatch(getGenres());
+    dispatch(vaciar())
   }, [dispatch]);
   useEffect(() => {
     dispatch(getGames());
@@ -129,6 +133,7 @@ export default function AddGame() {
 
   return (
     <div className="Form-body">
+      <button onClick={()=>history.push("/home")} >To Home</button>
       <form onSubmit={handleOnSubmit} className="Form-form">
         <div className="Form-div-title">
           <h1 className="Form-title">Create your Game!</h1>

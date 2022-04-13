@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from "react-redux"
 import GamesCard from "./GamesCard"
 import SearchBar from "./SearchBar"
 import { getGames,getGenres,filterByGenre,filterByOrder } from "../actions"
-import { Link } from 'react-router-dom';
+import { Link,useHistory } from 'react-router-dom';
 import Paginado from "./Paginado"
 import "../styles/Home.scss"
 
 
 export default function Home(){
-
+    var history= useHistory()
    const [aux , setAux] = useState('') 
 
     //Mi data de los estados
@@ -39,13 +39,18 @@ console.log(currentCharacters,state)
 //Funcion del select Genres/api/db
 function handleOnGenres(event){  
     dispatch(filterByGenre(event.target.value))   
-    setAux(event.target.value)} 
-    // console.log("estado auxiliar",aux)
+    setAux(event.target.value)
+    setCurrentPage(1)
+    
+} 
+// console.log("estado auxiliar",aux)
 
 //Funcion del los select by orders 
 function handleOnOrder(event){  
     dispatch(filterByOrder(event.target.value))   
-    setAux(event.target.value)} 
+    setAux(event.target.value)
+    setCurrentPage(1)
+} 
     // console.log("estado auxiliar",aux)
 
 
@@ -86,7 +91,6 @@ function handleOnOrder(event){
     <option value='high'>high</ option>
     <option value='low'>low</   option>     
 </select>
-    
 <button className="Home-AddGame" id='AddGame'><Link to={"/AddGame"}>Create a Game</Link></button> 
 </div>
 {state &&<Paginado

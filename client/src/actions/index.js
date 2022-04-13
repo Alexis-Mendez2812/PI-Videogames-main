@@ -9,6 +9,14 @@ export function getGames(){
         })
     }
 }
+export function vaciar(){
+    
+       
+        return {
+            type: "VACIAR",
+        }
+    
+}
 
 export function getNameGame(name){
     return async function(dispatch){
@@ -43,6 +51,8 @@ export function createGame(game){
      try{
 
          let json = await axios.post(`http://localhost:3001/games/post`,game);
+         console.log("el juego creado es")
+         console.log(json.data)
          return dispatch({
              type: "CREATE_GAME",
              payload:json.data

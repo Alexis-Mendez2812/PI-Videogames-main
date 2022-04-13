@@ -1,17 +1,25 @@
-import { useParams } from "react-router-dom"
+import { useHistory, useParams } from "react-router-dom"
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import {  getIdGame } from "../actions";
+import {  getIdGame,vaciar } from "../actions";
 import "../styles/CardDetail.scss"
 
 export default function GameDetail(){
+    const history = useHistory()
     const {id} = useParams()
     // console.log(id)
     const dispatch = useDispatch()
     useEffect(() => {
-      return  dispatch(getIdGame(id));
+      dispatch(getIdGame(id));
+      return function vaciado(){
+          dispatch(vaciar())
+      }
       }, [dispatch]);
+      const handleVaciar= function () {
+                dispatch(vaciar())
+                history.push("/home")
+      }
     let game = useSelector((state) => state.game);
     // console.log(game)
     
@@ -26,6 +34,10 @@ export default function GameDetail(){
           <div className="CardDetail-conteiner-img">
       <h1 className="CardDetail-h1"  >{name}</h1>
     <img className="CardDetail-img" src={background_image} alt={background_image} />
+    </div>
+    <div>
+    <button onClick={handleVaciar} >To Home</button>
+
     </div>
     <div className="CardDetail-conteiner">
     <div>

@@ -15,6 +15,11 @@ switch(action.type){
             games:action.payload,
             allGames:action.payload
         }
+    case "VACIAR":
+        return {
+            ...state,
+            gamed:{}
+        }
     case "CREATE_GAME":
         return {
             ...state,
