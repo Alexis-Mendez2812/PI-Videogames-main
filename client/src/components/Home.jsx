@@ -109,6 +109,7 @@ allCharacters={state.length}
 paginado={paginado}
 />}
 </div>
+{state?.length===0 && <h1 className="mensaje-error" > No hay juegos disponibles  </h1> }
 <p>{aux}</p>
     
 </div>

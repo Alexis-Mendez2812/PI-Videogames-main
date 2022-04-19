@@ -77,7 +77,7 @@ low */
 let order= ""
 switch (action.payload) {
     
-    case "asc":order= state.allGames.sort(function (a, b) {
+    case "asc":order= state.games.sort(function (a, b) {
   if (a.name > b.name) {
     return 1;
   }
@@ -86,7 +86,7 @@ switch (action.payload) {
   }
   return 0;
 });break;
-    case "des":order= state.allGames.sort(function (a, b) {
+    case "des":order= state.games.sort(function (a, b) {
   if (a.name < b.name) {
     return 1;
   }
@@ -95,7 +95,7 @@ switch (action.payload) {
   }
   return 0;
 });break;
-    case "high":order= state.allGames.sort(function (a, b) {
+    case "high":order= state.games.sort(function (a, b) {
   if (Number(a.rating) < Number(b.rating)) {
     return 1;
   }
@@ -104,7 +104,7 @@ switch (action.payload) {
   }
   return 0;
 });break;
-    case "low":order= state.allGames.sort(function (a, b) {
+    case "low":order= state.games.sort(function (a, b) {
   if (Number(a.rating) > Number(b.rating)) {
     return 1;
   }
@@ -114,7 +114,7 @@ switch (action.payload) {
   return 0;
 });break;
 
-    default:order=state.allGames ;
+    default:order=state.games ;
 }
         // let order = ""
         // if(action.payload=== "asc"||action.payload=== "des"){

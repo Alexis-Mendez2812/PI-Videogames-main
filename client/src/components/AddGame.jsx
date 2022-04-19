@@ -81,7 +81,8 @@ export default function AddGame() {
       setSelect(select.filter((e) => e !== event.target.value));
       setGame({
         ...game,
-        platforms: select.filter((e) => e !== event.target.value),
+        platforms: select.filter(
+          (e) => e !== event.target.value)
       });
       setController(
         validate({
