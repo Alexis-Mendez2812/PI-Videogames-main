@@ -134,8 +134,8 @@ export default function AddGame() {
 
   return (
     <div className="Form-body">
-      <button onClick={()=>history.push("/home")} >To Home</button>
       <form onSubmit={handleOnSubmit} className="Form-form">
+      <button className="toHome" onClick={()=>history.push("/home")} >To Home</button>
         <div className="Form-div-title">
           <h1 className="Form-title">Create your Game!</h1>
         </div>

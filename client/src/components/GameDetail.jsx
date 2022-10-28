@@ -36,7 +36,7 @@ export default function GameDetail(){
     <img className="CardDetail-img" src={background_image} alt={background_image} />
     </div>
     <div>
-    <button onClick={handleVaciar} >To Home</button>
+    <button  className="toHome" onClick={handleVaciar} >To Home</button>
 
     </div>
     <div className="CardDetail-conteiner">

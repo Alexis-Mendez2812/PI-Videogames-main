@@ -133,7 +133,6 @@
 }
 
 .slider {
-    -webkit-appearance: none;
     width: 50%;
     height: 15px;
     background: #000;
@@ -215,4 +214,29 @@
 .Form-input-plat{
     width: 100% ;
     display: flex;
+}
+
+
+.toHome {
+	box-shadow: 0px 0px 4px 3px #1b7804;
+	background:linear-gradient(to bottom, #44c767 5%, #5cbf2a 100%);
+	background-color:#066e22;
+	border-radius:13px;
+	border:1px solid #00f01c;
+	display:inline-block;
+	cursor:pointer;
+	color:#000000;
+	font-family:Arial;
+	font-size:19px;
+	padding:12px 15px;
+	text-decoration:none;
+	text-shadow:2px 2px 4px #2f6627;
+}
+.toHome:hover {
+	background:linear-gradient(to bottom, #5cbf2a 5%, #44c767 100%);
+	background-color:#5cbf2a;
+}
+.toHome:active {
+	position:relative;
+	top:1px;
 }

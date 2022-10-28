@@ -10,6 +10,21 @@ const { API_KEY } = process.env;
 
 const router = Router();
 
+router.get("/fotos", async (req, res) => {
+  function mapeo(arr) {
+    arr = arr.map((e) => e.name);
+    //console.log(arr);
+    return arr;
+  }
+
+  let games = await allGames();
+  games = games.map((e) => (  
+    `${e.background_image}`
+   ));
+
+  res.send(games);
+});
+
 router.get("/", async (req, res) => {
   function mapeo(arr) {
     arr = arr.map((e) => e.name);
@@ -54,31 +69,14 @@ router.get("/:id", async (req, res) => {
 
 
 router.post(`/post`, async (req, res) => {
-  const {
-    name,
-    description,
-    platforms,
-    released,
-    rating,
-    background_image,
-    genres,
-  } = req.body;
+  const {name,description,platforms,released,rating,background_image,genres,} = req.body;
   try {
     const [game, created] = await Videogames.findOrCreate({
       where: {
-        name,
-        description,
-        platforms,
-        released,
-        rating,
-        background_image,
-      },
-    });
+      name,description,platforms,released,rating,background_image}});
     // console.log("se creó mi game? "+ created )
     // console.log(genres)
-    let gens = await Genres.findAll({
-      where: { name: genres },
-    });
+    let gens = await Genres.findAll({ where: { name: genres },    });
     // console.log(gens)
     let gens2 = gens.map((e) => e.id);
     await game.addGenres(gens2);
@@ -103,11 +101,11 @@ router.post(`/post2`, async (req, res) => {
 });
 
 async function allGames() {
-  let games1 = axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=1`);
-  let games2 = axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=2`);
-  let games3 = axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=3`);
-  let games4 = axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=4`);
-  let games5 = axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=5`);
+  let games1 = axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=6`);
+  let games2 = axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=7`);
+  let games3 = axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=8`);
+  let games4 = axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=9`);
+  let games5 = axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=10`);
   let games = await Promise.all([games1, games2, games3, games4, games5]);
 
   games = games.map((e) => e.data.results);
