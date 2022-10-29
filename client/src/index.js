@@ -7,11 +7,14 @@ import {BrowserRouter} from "react-router-dom"
 import {Provider} from "react-redux"
 import store from "./store"
 import axios from 'axios';
+import dotenv from "dotenv";
+dotenv.config();
 
+// axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001";
+// axios.defaults.baseURL = 'http://localhost:3001';
+axios.defaults.baseURL = 'https://app-pi-videogames.herokuapp.com/';
 const container = document.getElementById("root")
 
-axios.defaults.baseURL = 'https://app-pi-videogames.herokuapp.com/';
-// axios.defaults.baseURL = 'http://localhost:3001';
 const root = createRoot(container)
 
 
