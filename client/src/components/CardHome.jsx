@@ -17,7 +17,7 @@ export default function CardHome(props){
 
     <h4  className="CardHome-star">{rating} ⭐</h4>
     <div className="CardHome-div-span" >
-        {Genres.map((e)=>(<span className="CardHome-span" key={e.id}>{e.name} </span>))}<br/><br/>
+        {Genres.length>0 ?  Genres.map((e)=>(<span className="CardHome-span" key={e.id}>{e.name} </span>)): <span className="CardHome-span">Sin género</span>  }<br/><br/>
     </div>
     <div >
 

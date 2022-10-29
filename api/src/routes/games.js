@@ -46,6 +46,14 @@ router.get("/", async (req, res) => {
   }
   res.send(datos);
 });
+router.get("/search", async (req, res) => {
+  const {name} = req.query;
+  let {data} = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&search=${name}`)
+let games=data.results.map((e)=>({"id":e.id,"name":e.name,"background_image":e.background_image,"Genres":e.genres,"rating":e.rating}))
+  games= games.filter((e)=>e.background_image!==null)
+  
+  res.send(games);
+});
 
 router.get("/db", async (req, res) => {
   let games = await gamesDb();
@@ -55,10 +63,10 @@ router.get("/:id", async (req, res) => {
   let { id } = req.params;
   console.log(id,typeof id)
   let game=""
-  if( id.length<6){
+  if( id.length<8){
      game = await gameById(id);
 
-  }else if( id.length>6){
+  }else{
    game = await gamesDb();
    game = game.filter((e) => e.id === id);
   }
