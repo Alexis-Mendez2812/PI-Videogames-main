@@ -7,13 +7,12 @@ import {BrowserRouter} from "react-router-dom"
 import {Provider} from "react-redux"
 import store from "./store"
 import axios from 'axios';
-// import dotenv from 'dotenv';
-const container = document.getElementById("root")
-const root = createRoot(container)
-// dotenv.config();
 
-// axios.defaults.baseURL = 'https://yachtimeapp.herokuapp.com';
-axios.defaults.baseURL = 'http://localhost:3001';
+const container = document.getElementById("root")
+
+axios.defaults.baseURL = 'https://app-pi-videogames.herokuapp.com/';
+// axios.defaults.baseURL = 'http://localhost:3001';
+const root = createRoot(container)
 
 
 root.render(
