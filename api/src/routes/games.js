@@ -10,21 +10,6 @@ const { API_KEY } = process.env;
 
 const router = Router();
 
-router.get("/fotos", async (req, res) => {
-  function mapeo(arr) {
-    arr = arr.map((e) => e.name);
-    //console.log(arr);
-    return arr;
-  }
-
-  let games = await allGames();
-  games = games.map((e) => (  
-    `${e.background_image}`
-   ));
-
-  res.send(games);
-});
-
 router.get("/", async (req, res) => {
   function mapeo(arr) {
     arr = arr.map((e) => e.name);
